@@ -46,6 +46,9 @@ Genera la chiave dell'applicazione (Laravel richiede una chiave di applicazione 
 Per creare le tabelle nel database, esegui le migrazioni:
 >php artisan migrate
 
+Per popolare il Database, utilizza i dati di esempio generati dalla factory, con il comando Artisan:
+>php artisan db:seed
+
 Avvia il Server di Sviluppo
 >php artisan serve
 

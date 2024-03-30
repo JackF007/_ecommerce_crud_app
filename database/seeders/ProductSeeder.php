@@ -9,7 +9,7 @@ use App\Models\Product;
 class ProductSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Popola il DB con i dati random dal seed
      */
     public function run(): void
     {

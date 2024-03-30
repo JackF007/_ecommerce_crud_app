@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ProductFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * Definisce modello per i dati di default
      *
      * @return array<string, mixed>
      */
