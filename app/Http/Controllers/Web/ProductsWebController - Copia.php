@@ -3,31 +3,36 @@
 namespace App\Http\Controllers\Web;
 
 use App\Models\Product;
-use App\Http\Requests\ProductStoreRequest;
-use App\Http\Requests\ProductUpdateRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /* Questo controller gestisce le operazioni CRUD con visualizzazione attraverso le Blade view */
 
 class ProductsWebController extends Controller
 {
-    // Mostra tutti i prodotti
+
     public function index()
     {
         $products = Product::all();
         return view('products.index', ['products' => $products]);
     }
 
-    // Mostra la form di creazione del prodotto
+    // Metodo per mostrare la form di creazione del prodotto
     public function create()
     {
         return view('products.create');
     }
     
-    // Salva un nuovo prodotto utilizzando la Custom Request Class
-    public function store(ProductStoreRequest $request)
+    // Metodo per salvare un nuovo prodotto
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        $data = $request->validate([
+            'nome' => 'required|string|max:255',
+            'qnt' => 'required|numeric|min:0',
+            'prezzo' => 'required|numeric|min:0',
+            'descrizione' => 'nullable|string',
+            'image' => 'nullable|image|max:1999'
+        ]);
 
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();
@@ -39,16 +44,22 @@ class ProductsWebController extends Controller
         return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiunto con successo');
     }
 
-    // Mostra la form di modifica del prodotto
+    // Metodo per mostrare la form di modifica del prodotto
     public function edit(Product $product)
     {
         return view('products.edit', compact('product'));
     }
 
-    // Aggiorna un prodotto esistente utilizzando la Custom Request Class
-    public function update(ProductUpdateRequest $request, Product $product)
+    // Metodo per aggiornare un prodotto esistente
+    public function update(Request $request, Product $product)
     {
-        $data = $request->validated();
+        $data = $request->validate([
+            'nome' => 'required',
+            'qnt' => 'required|numeric',
+            'prezzo' => 'required|numeric',
+            'descrizione' => 'nullable',
+            'image' => 'nullable|image|max:1999'
+        ]);
 
         if ($request->hasFile('image')) {
             $filename = $request->image->getClientOriginalName();

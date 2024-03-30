@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        // Aggiungo questa riga per eseguire il ProductSeeder
+        // Esegue il ProductSeeder
         $this->call(ProductSeeder::class);
 
     }
