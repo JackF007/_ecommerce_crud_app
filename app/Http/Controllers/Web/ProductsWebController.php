@@ -27,10 +27,10 @@ class ProductsWebController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'nome' => 'required',
-            'qnt' => 'required|numeric',
-            'prezzo' => 'required|numeric',
-            'descrizione' => 'nullable',
+            'nome' => 'required|string|max:255',
+            'qnt' => 'required|numeric|min:0',
+            'prezzo' => 'required|numeric|min:0',
+            'descrizione' => 'nullable|string',
             'image' => 'nullable|image|max:1999'
         ]);
 
