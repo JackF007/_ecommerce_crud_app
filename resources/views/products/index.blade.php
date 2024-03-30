@@ -80,5 +80,7 @@
     </div>
     </div>
 </div>
+<script src="{{ asset('js/alertHandler.js') }}"></script>
+
 </body>
 </html>
