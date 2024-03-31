@@ -6,18 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 
-/* Questo controller gestisce i metodi CRUD con risposte JSON */
-
 class ProductsController extends Controller
 {
-    // Metodo per restituire tutti i prodotti in formato JSON
+    // Metodo per mostrare tutti i prodotti
     public function index(): JsonResponse
     {
         $products = Product::all();
         return response()->json($products);
     }
 
-    //Metodo per restituire un prodotto specifico in formato JSON
+    // Metodo per mostrare un singolo prodotto
     public function show($id): JsonResponse
     {
         $product = Product::find($id);
@@ -29,3 +27,4 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 }
+
