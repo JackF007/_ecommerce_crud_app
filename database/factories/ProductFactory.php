@@ -3,8 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Storage;
+
 
 class ProductFactory extends Factory
 {
@@ -24,8 +26,11 @@ class ProductFactory extends Factory
     
         $image = !empty($imageFiles) ? $this->faker->randomElement($imageFiles) : null;
 
+        $categoryIds = Category::pluck('id')->toArray();
+
         return [
             'nome' => $this->faker->word(),
+            'category_id' => $this->faker->randomElement($categoryIds),
             'qnt' => $this->faker->numberBetween(1, 100),
             'prezzo' => $this->faker->randomFloat(2, 0, 1000),
             'descrizione' => $this->faker->sentence(),

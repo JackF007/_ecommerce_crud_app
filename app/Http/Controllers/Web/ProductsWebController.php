@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,8 @@ class ProductsWebController extends Controller
     // Mostra la form di creazione del prodotto
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create',compact('categories'));
     }
     
     // Salva un nuovo prodotto utilizzando la Custom Request Class
@@ -42,7 +44,8 @@ class ProductsWebController extends Controller
     // Mostra la form di modifica del prodotto
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     // Aggiorna un prodotto esistente utilizzando la Custom Request Class
@@ -55,6 +58,8 @@ class ProductsWebController extends Controller
             $request->image->storeAs('images', $filename, 'public');
             $data['image'] = $filename;
         }
+      
+     \Log::info($data);
 
         $product->update($data);
         return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiornato con successo');

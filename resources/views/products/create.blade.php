@@ -27,6 +27,15 @@ integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJ
     <form method="POST" action="/store-prodotto" enctype="multipart/form-data">
         @csrf        
 
+        <div class="form-group">
+            <label for="category_id">Categoria</label>
+            <select class="form-control" id="category_id" name="category_id">
+                <option value="">Seleziona una Categoria</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->nome_categoria }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="form-group mb-2">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
