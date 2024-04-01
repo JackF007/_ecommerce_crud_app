@@ -8,14 +8,14 @@ use Illuminate\Http\JsonResponse;
 
 class ProductsController extends Controller
 {
-    // Metodo per mostrare tutti i prodotti
+    // Metodo: mostra tutti i prodotti in Json
     public function index(): JsonResponse
     {
         $products = Product::all();
         return response()->json($products);
     }
 
-    // Metodo per mostrare un singolo prodotto
+    // Metodo: mostra un singolo prodotto in Json
     public function show($id): JsonResponse
     {
         $product = Product::find($id);
@@ -27,4 +27,3 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 }
-

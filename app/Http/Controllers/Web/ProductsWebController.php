@@ -8,25 +8,27 @@ use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Controllers\Controller;
 
-/* Questo controller gestisce le operazioni CRUD con visualizzazione attraverso le Blade view */
+/* Questo controller gestisce le operazioni CRUD con visualizzazione attraverso le Blade view 
+   Si può decidere qui se visualizzare tramite blade view o stampare direttamente  le risposte json
+   per ogni operazione. Basta commentare o meno le parti specifiche nei metodi*/
 
 class ProductsWebController extends Controller
 {
-    // Mostra tutti i prodotti
+    // Metodo : mostra tutti i prodotti
     public function index()
     {
         $products = Product::all();
         return view('products.index', ['products' => $products]);
     }
 
-    // Mostra la form di creazione del prodotto
+    // Metodo : mostra la form di creazione del prodotto
     public function create()
     {
         $categories = Category::all();
         return view('products.create',compact('categories'));
     }
     
-    // Salva un nuovo prodotto utilizzando la Custom Request Class
+    // Metodo : salva un nuovo prodotto utilizzando la Custom Request Class
     public function store(ProductStoreRequest $request)
     {
         $data = $request->validated();
@@ -38,17 +40,25 @@ class ProductsWebController extends Controller
         }
 
         Product::create($data);
-        return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiunto con successo');
+
+        //PER STAMPARE RISPOSTA JSON
+        return response()->json([
+            'message' => 'Prodotto aggiunto con successo',
+            'product' => $data
+        ]);
+        
+    //PER VISUALIZZAZIONE TRAMITE BLADE
+        //return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiunto con successo');
     }
 
-    // Mostra la form di modifica del prodotto
+    // Metodo: mostra la form di modifica del prodotto
     public function edit(Product $product)
     {
         $categories = Category::all();
         return view('products.edit', compact('product', 'categories'));
     }
 
-    // Aggiorna un prodotto esistente utilizzando la Custom Request Class
+    // Metodo: aggiorna un prodotto esistente utilizzando la Custom Request Class
     public function update(ProductUpdateRequest $request, Product $product)
     {
         $data = $request->validated();
@@ -62,13 +72,30 @@ class ProductsWebController extends Controller
      \Log::info($data);
 
         $product->update($data);
-        return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiornato con successo');
+       
+    //PER STAMPARE RISPOSTA JSON
+        return response()->json([
+            'message' => 'Prodotto aggiornato con successo',
+            'product' => $product
+        ]);
+    //PER VISUALIZZAZIONE TRAMITE BLADE
+       // return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiornato con successo');
     }
 
-    // Metodo per eliminare un prodotto
+    
+    // Metodo: eliminazione prodotto
     public function destroy(Product $product)
     {
+        $deletedProduct = $product;
+
         $product->delete();
-        return redirect(route('prodotti.index'))->with('success', 'Prodotto eliminato con successo');
+    
+    //PER STAMPARE RISPOSTA JSON
+        return response()->json([
+            'message' => 'Prodotto eliminato con successo',
+            'product' => $deletedProduct
+        ]);
+    //PER VISUALIZZAZIONE TRAMITE BLADE 
+        //return redirect(route('prodotti.index'))->with('success', 'Prodotto eliminato con successo');
     }
 }
