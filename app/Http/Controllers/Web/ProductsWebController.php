@@ -43,8 +43,8 @@ class ProductsWebController extends Controller
 
         //PER STAMPARE RISPOSTA JSON
         return response()->json([
-            'message' => 'Prodotto aggiunto con successo',
-            'product' => $data
+            'messaggio' => 'Prodotto aggiunto con successo',
+            'prodotto' => $data
         ]);
         
     //PER VISUALIZZAZIONE TRAMITE BLADE
@@ -75,8 +75,8 @@ class ProductsWebController extends Controller
        
     //PER STAMPARE RISPOSTA JSON
         return response()->json([
-            'message' => 'Prodotto aggiornato con successo',
-            'product' => $product
+            'messaggio' => 'Prodotto aggiornato con successo',
+            'prodotto' => $product
         ]);
     //PER VISUALIZZAZIONE TRAMITE BLADE
        // return redirect(route('prodotti.index'))->with('success', 'Prodotto aggiornato con successo');
@@ -92,8 +92,8 @@ class ProductsWebController extends Controller
     
     //PER STAMPARE RISPOSTA JSON
         return response()->json([
-            'message' => 'Prodotto eliminato con successo',
-            'product' => $deletedProduct
+            'messaggio' => 'Prodotto eliminato con successo',
+            'prodotto' => $deletedProduct
         ]);
     //PER VISUALIZZAZIONE TRAMITE BLADE 
         //return redirect(route('prodotti.index'))->with('success', 'Prodotto eliminato con successo');
