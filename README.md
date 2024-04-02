@@ -83,6 +83,7 @@ Aggiungere prodotto :
 
 Risposta : "Messaggio informativo + dati prodotto aggiunto"
 Formato: Json
+
 ---
 Modificare prodotto : 
 •	(UI)endpoint ‘/prodotti’ -> bottone ‘Modifica’ su riga interessata;
@@ -90,6 +91,7 @@ Modificare prodotto :
 
 Risposta : "Messaggio informativo + dati prodotto modificato" 
 Formato: Json
+
 ---
 Rimuovere prodotto :
 •	endpoint ‘/prodotti’ -> bottone ‘Rimuovi’ su riga interessata;
